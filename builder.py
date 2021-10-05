@@ -31,6 +31,16 @@ class Select:
         self.__where = where_expression
         return self
 
+    def and_(self, conditional_expression: str):
+        Validations.if_falsy_then_raise(conditional_expression, 'AND')
+        self.__where += f' AND {conditional_expression}'
+        return self
+
+    def or_(self, conditional_expression: str):
+        Validations.if_falsy_then_raise(conditional_expression, 'OR')
+        self.__where += f' OR {conditional_expression}'
+        return self
+
     def group_by_(self, group_by_expression: Union[str, int]):
         Validations.if_falsy_then_raise(group_by_expression, 'GROUP BY')
         self.__group_by = group_by_expression

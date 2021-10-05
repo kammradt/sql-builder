@@ -48,6 +48,31 @@ class TestSelect(TestCase):
 
         self.assertEqual(result, expected)
 
+    def test_where_with_and(self):
+        expected = 'SELECT field0, field1 FROM table WHERE field0 = 0 AND field1 = 1;'
+        result = Select('field0, field1').from_('table').where_('field0 = 0').and_('field1 = 1').sql()
+
+        self.assertEqual(result, expected)
+
+    def test_where_with_or(self):
+        expected = 'SELECT field0, field1 FROM table WHERE field0 = 0 OR field1 = 1;'
+        result = Select('field0, field1').from_('table').where_('field0 = 0').or_('field1 = 1').sql()
+
+        self.assertEqual(result, expected)
+
+    def test_where_with_both(self):
+        expected = 'SELECT field0, field1, field2 FROM table WHERE field0 = 0 AND field1 = 1 OR field2 = 2;'
+        result = (
+            Select('field0, field1, field2')
+                .from_('table')
+                .where_('field0 = 0')
+                .and_('field1 = 1')
+                .or_('field2 = 2')
+                .sql()
+        )
+
+        self.assertEqual(result, expected)
+
     def test_group_by_str(self):
         expected = 'SELECT field FROM table WHERE field = 1 GROUP BY field;'
         result = Select('field').from_('table').where_('field = 1').group_by_("field").sql()
