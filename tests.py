@@ -9,6 +9,12 @@ class TestSelect(TestCase):
 
         self.assertEqual(select.sql(), f'{select}')
 
+    def test_select_star(self):
+        expected = 'SELECT *;'
+        result = Select().sql()
+
+        self.assertEqual(result, expected)
+
     def test_select(self):
         expected = 'SELECT field;'
         result = Select('field').sql()

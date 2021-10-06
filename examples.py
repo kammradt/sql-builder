@@ -1,13 +1,11 @@
 from builder import Select
 
-print(
-    Select('field').from_('table').where_('a = 1').group_by_(1)
-)
+Select('field').from_('table')
 
-print(
-    Select('field').from_('table').where_('a = 1').and_('b = 2')
-)
+Select('field').from_('table').where_('field = 1')
 
-print(
-    Select('field').from_('table').where_('a = 1').or_('b = 2').limit_(10)
-)
+Select('field0, field1').from_('table').where_('field0 = 0').or_('field1 = 1')
+
+Select('field').from_('table').group_by_("field").order_by_("field")
+
+Select().from_('table').limit_(10)

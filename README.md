@@ -21,14 +21,33 @@
 
 ## Description 📝  
   
-I was studying the builder pattern and decided to apply in a real problem.  
+I was studying the builder pattern and decided to apply in a "real problem".  
 This was a funny project to do, but please: **Don't take it seriously**
-> This project does not want in any way be a product, the-best-solution nor compete with any other similar project, this is just a the result of a learning process :stuck_out_tongue:  
+> This project does not want in any way be a product, the-best-solution nor compete with any other similar project, this is just a the result of a learning process :rocket:  
 > > If you are searching for a real SQL builder using python, please check out at [PyPika](https://github.com/kayak/pypika) or [Ibis](https://ibis-project.org/) 
 
 ## How to use :pencil2:  
+```shell
+>>> from builder import Select
 
-> You can also verify all examples at `examples.py`.
+# Note that you can call explicitly .sql() or let __repr__ eval as str.
+>>> Select('field').from_('table')
+SELECT field FROM table;
+
+>>> Select('field').from_('table').where_('field = 1')
+SELECT field FROM table WHERE field = 1;
+
+>>> Select('field0, field1').from_('table').where_('field0 = 0').or_('field1 = 1')
+SELECT field0, field1 FROM table WHERE field0 = 0 OR field1 = 1;
+
+>>> Select('field').from_('table').group_by_("field").order_by_("field")
+SELECT field FROM table GROUP BY field ORDER BY field;
+
+>>> Select().from_('table').limit_(10)
+SELECT * FROM table LIMIT 10;
+```
+
+> You can also verify all examples and test then at `python examples.py`.
 
 ## Author  
   

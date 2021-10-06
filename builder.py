@@ -10,9 +10,15 @@ class Select:
     __order_by: Union[str, int] = ''  # TODO accept list[str] or list[int]
     __limit: int = 0
 
-    def __init__(self, select_expression: str) -> None:
-        self.__if_falsy_then_raise(select_expression, 'SELECT')
-        self.__select = select_expression
+    def __init__(self, select_expression: str = None) -> None:
+        """For easier usage, if no fields are given, '*' is used."""
+
+        # Explicit verify for None since there are other non-None invalid values
+        if select_expression is not None:
+            self.__if_falsy_then_raise(select_expression, 'SELECT')
+            self.__select = select_expression
+        else:
+            self.__select = '*'
 
     def from_(self, from_expression: str):
         self.__if_falsy_then_raise(from_expression, 'FROM')
@@ -50,6 +56,7 @@ class Select:
         return self
 
     def __if_falsy_then_raise(self, expression: Union[str, int], name: str) -> None:
+        # TODO: Should check for valid strings, and raise for stuff like `'`, `/`, etc..
         if not expression:
             raise ValueError(f'{expression} is not valid for {name}')
 
