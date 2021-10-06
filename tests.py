@@ -113,6 +113,6 @@ class TestSelect(TestCase):
 
     def test_limit(self):
         expected = 'SELECT field FROM table WHERE field = 1 LIMIT 1;'
-        result = Select('field') .from_('table') .where_('field = 1') .limit_(1) .sql()
+        result = Select('field').from_('table').where_('field = 1').limit_(1).sql()
 
         self.assertEqual(result, expected)
