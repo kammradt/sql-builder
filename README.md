@@ -25,7 +25,7 @@
 1. Is this repo serious? `No`
 2. Should I use this? `Only for learning purposes`
 3. Is the code fast? `No`
-4. Will stuff like analytics functions? `Of course no`
+4. Will stuff like analytics functions be added? `Of course no`
 
 I was studying the builder pattern and decided to apply in a "real problem".  
 This was a funny project to do, but please: **Don't take it seriously**
